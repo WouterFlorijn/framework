@@ -616,13 +616,13 @@ trait HasRelationships
     public function touchOwners()
     {
         foreach ($this->touches as $relation) {
-            $relation = $this->$relation();
+            $relationInstance = $this->$relation();
 
-            if (! $relation) {
+            if (! $relationInstance) {
                 continue;
             }
 
-            $relation->touch();
+            $relationInstance->touch();
 
             if ($this->$relation instanceof self) {
                 $this->$relation->fireModelEvent('saved', false);
